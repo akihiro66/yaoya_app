@@ -11,3 +11,8 @@ puts "いらっしゃいませ！商品を選んで下さい。"
 products.each.with_index(1) do |product,i|
   puts "#{i}.#{product[:name]}(#{product[:price]}円)"
 end
+
+# 商品を選択
+print "商品の番号を選択 > "
+select_product_num = gets.to_i
+chosen_product = products[select_product_num - 1]
