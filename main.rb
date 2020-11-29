@@ -6,9 +6,16 @@ products = [
   {name: "なす", price: 400}
 ]
 
+# 定数を設定。ここでの変更がコード全体に反映される
+FIRST_PRODUCT_NUM = 1 # 表示する最初の商品の番号（変更可）
+LAST_PRODUCT_NUM = (FIRST_PRODUCT_NUM + products.size) - 1 # 表示する最後の商品の番号（変更不可）
+DISCOUNT_STANDARD_VALUE = 5 # 割引を適用する個数の基準値（変更可）
+DISCOUNT＿RATE = 0.1 # 割引率（変更可）
+AFRER_DISCOUNT_RATE = 1 - DISCOUNT＿RATE # 割引後の本体価格の割合（変更不可）
+
 # 商品を表示
 puts "いらっしゃいませ！商品を選んで下さい。"
-products.each.with_index(1) do |product,i|
+products.each.with_index(FIRST_PRODUCT_NUM) do |product,i|
   puts "#{i}.#{product[:name]}(#{product[:price]}円)"
 end
 
@@ -16,10 +23,13 @@ end
 while true
   print "商品の番号を選択 > "
   select_product_num = gets.to_i
-  break if (1..4).include?(select_product_num)
-  puts "1~4の番号を入力して下さい。"
+  break if (FIRST_PRODUCT_NUM..LAST_PRODUCT_NUM).include?(select_product_num)
+  puts "#{FIRST_PRODUCT_NUM}〜#{LAST_PRODUCT_NUM}の番号を入力して下さい。"
 end
-chosen_product = products[select_product_num - 1]
+
+# インデックスを調整して「選んだ商品」を定義
+chosen_product_index = select_product_num - FIRST_PRODUCT_NUM
+chosen_product = products[chosen_product_index]
 
 # 個数を決定
 puts "#{chosen_product[:name]}ですね。何個買いますか？"
@@ -32,9 +42,9 @@ end
 
 # 合計金額を計算
 total_price = chosen_product[:price] * quantity_of_product
-if quantity_of_product >= 5
-  puts "5個以上なので10％割引となります！"
-  total_price *= 0.9
+if quantity_of_product >= DISCOUNT_STANDARD_VALUE
+  puts "#{DISCOUNT_STANDARD_VALUE}個以上なので#{(DISCOUNT＿RATE*100).floor}％割引となります！"
+  total_price *= AFRER_DISCOUNT_RATE
 end
 puts "合計金額は#{total_price.floor}円です。"
 puts "お買い上げありがとうございました。"
