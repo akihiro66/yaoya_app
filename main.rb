@@ -13,17 +13,25 @@ products.each.with_index(1) do |product,i|
 end
 
 # 商品を選択
-print "商品の番号を選択 > "
-select_product_num = gets.to_i
+while true
+  print "商品の番号を選択 > "
+  select_product_num = gets.to_i
+  break if (1..4).include?(select_product_num)
+  puts "1~4の番号を入力して下さい。"
+end
 chosen_product = products[select_product_num - 1]
 
 # 個数を決定
 puts "#{chosen_product[:name]}ですね。何個買いますか？"
-print "個数を入力 > "
-quantity_of_product = gets.to_i
+while true
+  print "個数を入力 > "
+  quantity_of_product = gets.to_i
+  break if quantity_of_product >= 1
+  puts "1個以上選んで下さい。"
+end
 
+# 合計金額を計算
 total_price = chosen_product[:price] * quantity_of_product
-
 if quantity_of_product >= 5
   puts "5個以上なので10％割引となります！"
   total_price *= 0.9
