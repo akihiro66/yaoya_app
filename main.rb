@@ -16,3 +16,8 @@ end
 print "商品の番号を選択 > "
 select_product_num = gets.to_i
 chosen_product = products[select_product_num - 1]
+
+# 個数を決定
+puts "#{chosen_product[:name]}ですね。何個買いますか？"
+print "個数を入力 > "
+quantity_of_product = gets.to_i
