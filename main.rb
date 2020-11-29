@@ -21,3 +21,12 @@ chosen_product = products[select_product_num - 1]
 puts "#{chosen_product[:name]}ですね。何個買いますか？"
 print "個数を入力 > "
 quantity_of_product = gets.to_i
+
+total_price = chosen_product[:price] * quantity_of_product
+
+if quantity_of_product >= 5
+  puts "5個以上なので10％割引となります！"
+  total_price *= 0.9
+end
+puts "合計金額は#{total_price.floor}円です。"
+puts "お買い上げありがとうございました。"
