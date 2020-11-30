@@ -1,21 +1,37 @@
-require "./methods.rb"
+require "./product.rb"
+require "./greengrocer.rb"
+require "./user.rb"
 
 # 商品データ
-products = [
+product_params1 = [
   {name: "トマト", price: 100},
   {name: "きゅうり", price: 200},
   {name: "玉ねぎ", price: 300},
   {name: "なす", price: 400}
 ]
 
-# 定数を設定。ここでの変更がコード全体に反映される
-FIRST_PRODUCT_NUM = 1 # 表示する最初の商品の番号（変更可）
-LAST_PRODUCT_NUM = (FIRST_PRODUCT_NUM + products.size) - 1 # 表示する最後の商品の番号（変更不可）
-DISCOUNT_STANDARD_VALUE = 5 # 割引を適用する個数の基準値（変更可）
-DISCOUNT＿RATE = 0.1 # 割引率（変更可）
-AFRER_DISCOUNT_RATE = 1 - DISCOUNT＿RATE # 割引後の本体価格の割合（変更不可）
+# product_params1の商品を持つ八百屋の開店
+greengrocer1 = Greengrocer.new(product_params1)
 
-disp_products(products) # 商品を表示
-chosen_product = choose_product(products) # 商品を選択
-quantity_of_product = decide_quantity(chosen_product) # 商品の個数を決定
-calculate_charges(chosen_product, quantity_of_product) # 合計金額を計算
+# 追加商品データ
+adding_products1 = [
+  {name: "ごぼう", price: 250},
+  {name: "れんこん", price: 350}
+]
+
+# 商品を登録（adding_products1 の商品を追加）
+greengrocer1.register_product(adding_products1)
+
+# お客さんの来店
+user = User.new
+
+# 商品を表示
+greengrocer1.disp_products
+# 商品を選択
+user.choose_product(greengrocer1.products)
+# 個数を質問
+greengrocer1.ask_quantity(user.chosen_product)
+# 個数を決定
+user.decide_quantity
+# 金額金額を計算
+greengrocer1.calculate_charges(user)
