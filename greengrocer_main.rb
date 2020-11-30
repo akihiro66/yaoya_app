@@ -1,6 +1,7 @@
 require "./methods.rb"
 
 class Product
+  attr_reader :name, :price
   def initialize(product_params)
     @name = product_params[:name]
     @price = product_params[:price]
@@ -15,10 +16,16 @@ product_params = [
   {name: "なす", price: 400}
 ]
 
+# 商品インスタンスの生成
 products = []
 product_params.each do |param|
   products << Product.new(param)
 end
+
+# 八百屋の開店
+greengrocer = Greengrocer.new(porducts)
+# 商品を表示
+greengrocer.disp_products
 
 # 定数を設定。ここでの変更がコード全体に反映される
 FIRST_PRODUCT_NUM = 1 # 表示する最初の商品の番号（変更可）
