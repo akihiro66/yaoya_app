@@ -1,12 +1,24 @@
 require "./methods.rb"
 
+class Product
+  def initialize(product_params)
+    @name = product_params[:name]
+    @price = product_params[:price]
+  end
+end
+
 # 商品データ
-products = [
+product_params = [
   {name: "トマト", price: 100},
   {name: "きゅうり", price: 200},
   {name: "玉ねぎ", price: 300},
   {name: "なす", price: 400}
 ]
+
+products = []
+product_params.each do |param|
+  products << Product.new(param)
+end
 
 # 定数を設定。ここでの変更がコード全体に反映される
 FIRST_PRODUCT_NUM = 1 # 表示する最初の商品の番号（変更可）
