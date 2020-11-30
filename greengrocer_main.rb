@@ -1,31 +1,26 @@
-require "./methods.rb"
-
-class Product
-  attr_reader :name, :price
-  def initialize(product_params)
-    @name = product_params[:name]
-    @price = product_params[:price]
-  end
-end
+require "./product.rb"
+require "./greengrocer.rb"
+require "./user.rb"
 
 # 商品データ
-product_params = [
+product_params1 = [
   {name: "トマト", price: 100},
   {name: "きゅうり", price: 200},
   {name: "玉ねぎ", price: 300},
   {name: "なす", price: 400}
 ]
 
-# 商品インスタンスの生成
-products = []
-product_params.each do |param|
-  products << Product.new(param)
-end
+product_params2 = [
+  {name: "パセリ", price: 100},
+  {name: "ブロッコリー", price: 150}
+]
 
 # 八百屋の開店
-greengrocer = Greengrocer.new(porducts)
+greengrocer1 = Greengrocer.new(product_params1)
+greengrocer2 = Greengrocer.new(product_params2)
 # 商品を表示
-greengrocer.disp_products
+greengrocer1.disp_products
+greengrocer2.disp_products
 
 # 定数を設定。ここでの変更がコード全体に反映される
 FIRST_PRODUCT_NUM = 1 # 表示する最初の商品の番号（変更可）
